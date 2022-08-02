@@ -6,15 +6,12 @@ const Bread = require('../models/bread.js')
 // INDEX
 breads.get('/', async(req, res) => {
   const breads = await Bread.find();
-
   res.render("Index", {
     breads: breads,
     title: "Index Page",
   });
 
 })
-
-
 
 // CREATE
 breads.post('/', (req, res) => {
@@ -29,9 +26,6 @@ breads.post('/', (req, res) => {
   Bread.create(req.body)
   res.redirect('/breads')
 })
-
-
-
 
 // NEW
 breads.get('/new', (req, res) => {
