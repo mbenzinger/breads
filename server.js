@@ -12,9 +12,7 @@ mongoose.connect(process.env.MONGO_URI, {
   () => { console.log('connected to mongo: ', process.env.MONGO_URI) }
   )
 
-
 // CONFIGURATION
-
 const PORT = process.env.PORT
 const app = express()
 
@@ -30,14 +28,19 @@ app.get('/', (req, res) => {
   res.send('Welcome to an awesome App about Breads')
 })
 
-// Breads
+// breads
 const breadsController = require('./controllers/breads_controllers')
 app.use('/breads', breadsController)
+
+// bakers 
+const bakersController = require('./controllers/bakers_controller')
+app.use('/bakers', bakersController)
 
 // 404 Page
 app.get('*', (req, res) => {
   res.send('404')
 })
+
 
 // LISTEN
 app.listen(PORT, () => {

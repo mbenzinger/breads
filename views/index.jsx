@@ -18,7 +18,6 @@ function Index ({breads})  {
         <a href={`/breads/${bread.id}`}>
           {bread.name}
         </a>
-
       </li>
     )
   })
