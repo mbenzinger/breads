@@ -4,14 +4,21 @@ const breads = express.Router()
 const Bread = require('../models/bread.js')
 const Baker = require('../models/baker')
 
-// INDEX
-breads.get('/', async(req, res) => {
-  const breads = await Bread.find();
-  res.render("Index", {
-    breads: breads,
-    title: "Index Page",
-  });
+// Index: (virtuals activity)
+breads.get('/', (req, res) => {
+  Baker.find()
+    .then(foundBakers => {
+      Bread.find()
+      .then(foundBreads => {
+          res.render('index', {
+              breads: foundBreads,
+              bakers: foundBakers,
+              title: 'Index Page'
+          })
+      })
+    })
 })
+
 
 // CREATE
 breads.post('/', (req, res) => {
