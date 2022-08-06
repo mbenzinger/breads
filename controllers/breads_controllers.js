@@ -67,28 +67,34 @@ breads.get('/new', (req, res) => {
   
 })
 
-// EDIT
+// EDIT (populate activity)
 breads.get('/:id/edit', (req, res) => {
-  Bread.findById(req.params.id) 
-    .then(foundBread => { 
-      res.render('edit', {
-        bread: foundBread 
-      })
+  Baker.find()
+    .then(foundBakers => {
+        Bread.findById(req.params.id)
+          .then(foundBread => {
+            res.render('edit', {
+                bread: foundBread, 
+                bakers: foundBakers 
+            })
+          })
     })
 })
 
-// SHOW
-// SHOW
+
+// SHOW (populate activity)
 breads.get('/:id', (req, res) => {
   Bread.findById(req.params.id)
+      .populate('baker')
       .then(foundBread => {
-        const bakedBy = foundBread.getBakedBy() 
-        console.log(bakedBy)
         res.render('show', {
             bread: foundBread
         })
       })
-    })
+      .catch(err => {
+        res.send('404')
+      })
+})
 
 
 //UPDATE
@@ -104,7 +110,6 @@ breads.put('/:id', (req, res) => {
       res.redirect(`/breads/${req.params.id}`) 
     })
 })
-
 
 // DELETE
 breads.delete('/:id', (req, res) => {
@@ -128,7 +133,6 @@ breads.delete('/:indexArray', (req, res) => {
   res.status(303).redirect('/breads')
 })
 */
-
 
 module.exports = breads
 
