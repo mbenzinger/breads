@@ -88,8 +88,7 @@ breads.get('/:id/edit', (req, res) => {
     })
 })
 
-
-// SHOW (populate activity)
+// SHOW populate activity
 breads.get('/:id', (req, res) => {
   Bread.findById(req.params.id)
       .populate('baker')
@@ -102,7 +101,6 @@ breads.get('/:id', (req, res) => {
         res.send('404')
       })
 })
-
 
 //UPDATE
 breads.put('/:id', (req, res) => {

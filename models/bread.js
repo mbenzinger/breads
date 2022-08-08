@@ -16,7 +16,8 @@ const breadSchema = new Schema({
 
 // helper methods (populate activity)
 breadSchema.methods.getBakedBy = function(){
-  return `${this.name} was baked with love by ${this.baker.name}, who has been with us since ${this.baker.startDate.getFullYear()}`
+ // return `${this?.name} was baked with love by ${this?.baker.name}, who has been with us since ${this?.baker.startDate.getFullYear()}`
+ return `${this?.name} was baked with love by , who has been with us since `
 }
 
 // model and export 
